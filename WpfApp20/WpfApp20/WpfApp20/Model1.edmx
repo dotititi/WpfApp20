@@ -1,0 +1,1155 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище Model1" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Doctor">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="user_id" Type="int" Nullable="false" />
+          <Property Name="name" Type="varchar(max)" Nullable="false" />
+          <Property Name="fullname" Type="varchar(max)" Nullable="false" />
+          <Property Name="middlename" Type="varchar(max)" Nullable="false" />
+          <Property Name="hospital" Type="varchar(max)" Nullable="false" />
+          <Property Name="speciality" Type="varchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Documents">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="doctor_id" Type="int" Nullable="false" />
+          <Property Name="patient_id" Type="int" Nullable="false" />
+          <Property Name="type" Type="varchar(max)" Nullable="false" />
+          <Property Name="file" Type="varbinary(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DocumentSignature">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="document_id" Type="int" Nullable="false" />
+          <Property Name="patient_id" Type="int" Nullable="false" />
+          <Property Name="media" Type="varbinary(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Patient">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="user_id" Type="int" Nullable="false" />
+          <Property Name="name" Type="varchar(max)" Nullable="false" />
+          <Property Name="fullname" Type="varchar(max)" Nullable="false" />
+          <Property Name="middlename" Type="varchar(max)" Nullable="false" />
+          <Property Name="birthday" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PatientRecord">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="doctor_id" Type="int" Nullable="false" />
+          <Property Name="patient_id" Type="int" Nullable="false" />
+          <Property Name="date_of_visit" Type="datetime" Nullable="false" />
+          <Property Name="reason" Type="varchar(max)" Nullable="false" />
+          <Property Name="diagnosis" Type="varchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PatientResponse">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="questionnaire_id" Type="int" Nullable="false" />
+          <Property Name="patient_id" Type="int" Nullable="false" />
+          <Property Name="response" Type="varchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PatientResult">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="test_id" Type="int" Nullable="false" />
+          <Property Name="patient_id" Type="int" Nullable="false" />
+          <Property Name="result_text" Type="varchar(max)" Nullable="false" />
+          <Property Name="media" Type="varbinary(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Questionnaire">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="patient_id" Type="int" Nullable="false" />
+          <Property Name="doctor_id" Type="int" Nullable="false" />
+          <Property Name="description" Type="varchar(max)" Nullable="false" />
+          <Property Name="title" Type="varchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Recommendation">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="doctor_id" Type="int" Nullable="false" />
+          <Property Name="patient_id" Type="int" Nullable="false" />
+          <Property Name="context" Type="varchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="Test">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="title" Type="varchar(max)" Nullable="false" />
+          <Property Name="description" Type="varchar(max)" Nullable="false" />
+          <Property Name="instruction" Type="varchar(max)" Nullable="false" />
+          <Property Name="doctor_id" Type="int" Nullable="false" />
+          <Property Name="patient_id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TreatmentPlan">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="doctor_id" Type="int" Nullable="false" />
+          <Property Name="patient_id" Type="int" Nullable="false" />
+          <Property Name="plan_detailt" Type="varchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="login" Type="varchar(max)" Nullable="false" />
+          <Property Name="password" Type="varchar(max)" Nullable="false" />
+          <Property Name="role" Type="varchar(max)" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Doctor_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="Doctor" Type="Self.Doctor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Doctor">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Documents_Doctor">
+          <End Role="Doctor" Type="Self.Doctor" Multiplicity="1" />
+          <End Role="Documents" Type="Self.Documents" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Doctor">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Documents">
+              <PropertyRef Name="doctor_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Documents_Patient">
+          <End Role="Patient" Type="Self.Patient" Multiplicity="1" />
+          <End Role="Documents" Type="Self.Documents" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Patient">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Documents">
+              <PropertyRef Name="patient_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DocumentSignature_Documents">
+          <End Role="Documents" Type="Self.Documents" Multiplicity="1" />
+          <End Role="DocumentSignature" Type="Self.DocumentSignature" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Documents">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="DocumentSignature">
+              <PropertyRef Name="document_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DocumentSignature_Patient">
+          <End Role="Patient" Type="Self.Patient" Multiplicity="1" />
+          <End Role="DocumentSignature" Type="Self.DocumentSignature" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Patient">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="DocumentSignature">
+              <PropertyRef Name="patient_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Patient_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="Patient" Type="Self.Patient" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Patient">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PatientRecord_Doctor">
+          <End Role="Doctor" Type="Self.Doctor" Multiplicity="1" />
+          <End Role="PatientRecord" Type="Self.PatientRecord" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Doctor">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="PatientRecord">
+              <PropertyRef Name="doctor_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PatientRecord_Patient">
+          <End Role="Patient" Type="Self.Patient" Multiplicity="1" />
+          <End Role="PatientRecord" Type="Self.PatientRecord" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Patient">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="PatientRecord">
+              <PropertyRef Name="patient_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PatientResponse_Patient">
+          <End Role="Patient" Type="Self.Patient" Multiplicity="1" />
+          <End Role="PatientResponse" Type="Self.PatientResponse" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Patient">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="PatientResponse">
+              <PropertyRef Name="patient_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PatientResponse_Questionnaire">
+          <End Role="Questionnaire" Type="Self.Questionnaire" Multiplicity="1" />
+          <End Role="PatientResponse" Type="Self.PatientResponse" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Questionnaire">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="PatientResponse">
+              <PropertyRef Name="questionnaire_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PatientResult_Patient">
+          <End Role="Patient" Type="Self.Patient" Multiplicity="1" />
+          <End Role="PatientResult" Type="Self.PatientResult" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Patient">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="PatientResult">
+              <PropertyRef Name="patient_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PatientResult_Test">
+          <End Role="Test" Type="Self.Test" Multiplicity="1" />
+          <End Role="PatientResult" Type="Self.PatientResult" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Test">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="PatientResult">
+              <PropertyRef Name="test_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Questionnaire_Doctor">
+          <End Role="Doctor" Type="Self.Doctor" Multiplicity="1" />
+          <End Role="Questionnaire" Type="Self.Questionnaire" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Doctor">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Questionnaire">
+              <PropertyRef Name="doctor_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Questionnaire_Patient">
+          <End Role="Patient" Type="Self.Patient" Multiplicity="1" />
+          <End Role="Questionnaire" Type="Self.Questionnaire" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Patient">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Questionnaire">
+              <PropertyRef Name="patient_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Recommendation_Doctor">
+          <End Role="Doctor" Type="Self.Doctor" Multiplicity="1" />
+          <End Role="Recommendation" Type="Self.Recommendation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Doctor">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Recommendation">
+              <PropertyRef Name="doctor_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Recommendation_Patient">
+          <End Role="Patient" Type="Self.Patient" Multiplicity="1" />
+          <End Role="Recommendation" Type="Self.Recommendation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Patient">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Recommendation">
+              <PropertyRef Name="patient_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Test_Doctor">
+          <End Role="Doctor" Type="Self.Doctor" Multiplicity="1" />
+          <End Role="Test" Type="Self.Test" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Doctor">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Test">
+              <PropertyRef Name="doctor_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Test_Patient">
+          <End Role="Patient" Type="Self.Patient" Multiplicity="1" />
+          <End Role="Test" Type="Self.Test" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Patient">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Test">
+              <PropertyRef Name="patient_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TreatmentPlan_Doctor">
+          <End Role="Doctor" Type="Self.Doctor" Multiplicity="1" />
+          <End Role="TreatmentPlan" Type="Self.TreatmentPlan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Doctor">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="TreatmentPlan">
+              <PropertyRef Name="doctor_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TreatmentPlan_Patient">
+          <End Role="Patient" Type="Self.Patient" Multiplicity="1" />
+          <End Role="TreatmentPlan" Type="Self.TreatmentPlan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Patient">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="TreatmentPlan">
+              <PropertyRef Name="patient_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище Model1Container">
+          <EntitySet Name="Doctor" EntityType="Self.Doctor" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Documents" EntityType="Self.Documents" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DocumentSignature" EntityType="Self.DocumentSignature" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Patient" EntityType="Self.Patient" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PatientRecord" EntityType="Self.PatientRecord" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PatientResponse" EntityType="Self.PatientResponse" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PatientResult" EntityType="Self.PatientResult" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Questionnaire" EntityType="Self.Questionnaire" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Recommendation" EntityType="Self.Recommendation" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Test" EntityType="Self.Test" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TreatmentPlan" EntityType="Self.TreatmentPlan" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Doctor_User" Association="Self.FK_Doctor_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Doctor" EntitySet="Doctor" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Documents_Doctor" Association="Self.FK_Documents_Doctor">
+            <End Role="Doctor" EntitySet="Doctor" />
+            <End Role="Documents" EntitySet="Documents" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Documents_Patient" Association="Self.FK_Documents_Patient">
+            <End Role="Patient" EntitySet="Patient" />
+            <End Role="Documents" EntitySet="Documents" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DocumentSignature_Documents" Association="Self.FK_DocumentSignature_Documents">
+            <End Role="Documents" EntitySet="Documents" />
+            <End Role="DocumentSignature" EntitySet="DocumentSignature" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DocumentSignature_Patient" Association="Self.FK_DocumentSignature_Patient">
+            <End Role="Patient" EntitySet="Patient" />
+            <End Role="DocumentSignature" EntitySet="DocumentSignature" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Patient_User" Association="Self.FK_Patient_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Patient" EntitySet="Patient" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PatientRecord_Doctor" Association="Self.FK_PatientRecord_Doctor">
+            <End Role="Doctor" EntitySet="Doctor" />
+            <End Role="PatientRecord" EntitySet="PatientRecord" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PatientRecord_Patient" Association="Self.FK_PatientRecord_Patient">
+            <End Role="Patient" EntitySet="Patient" />
+            <End Role="PatientRecord" EntitySet="PatientRecord" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PatientResponse_Patient" Association="Self.FK_PatientResponse_Patient">
+            <End Role="Patient" EntitySet="Patient" />
+            <End Role="PatientResponse" EntitySet="PatientResponse" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PatientResponse_Questionnaire" Association="Self.FK_PatientResponse_Questionnaire">
+            <End Role="Questionnaire" EntitySet="Questionnaire" />
+            <End Role="PatientResponse" EntitySet="PatientResponse" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PatientResult_Patient" Association="Self.FK_PatientResult_Patient">
+            <End Role="Patient" EntitySet="Patient" />
+            <End Role="PatientResult" EntitySet="PatientResult" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PatientResult_Test" Association="Self.FK_PatientResult_Test">
+            <End Role="Test" EntitySet="Test" />
+            <End Role="PatientResult" EntitySet="PatientResult" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Questionnaire_Doctor" Association="Self.FK_Questionnaire_Doctor">
+            <End Role="Doctor" EntitySet="Doctor" />
+            <End Role="Questionnaire" EntitySet="Questionnaire" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Questionnaire_Patient" Association="Self.FK_Questionnaire_Patient">
+            <End Role="Patient" EntitySet="Patient" />
+            <End Role="Questionnaire" EntitySet="Questionnaire" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Recommendation_Doctor" Association="Self.FK_Recommendation_Doctor">
+            <End Role="Doctor" EntitySet="Doctor" />
+            <End Role="Recommendation" EntitySet="Recommendation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Recommendation_Patient" Association="Self.FK_Recommendation_Patient">
+            <End Role="Patient" EntitySet="Patient" />
+            <End Role="Recommendation" EntitySet="Recommendation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Test_Doctor" Association="Self.FK_Test_Doctor">
+            <End Role="Doctor" EntitySet="Doctor" />
+            <End Role="Test" EntitySet="Test" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Test_Patient" Association="Self.FK_Test_Patient">
+            <End Role="Patient" EntitySet="Patient" />
+            <End Role="Test" EntitySet="Test" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TreatmentPlan_Doctor" Association="Self.FK_TreatmentPlan_Doctor">
+            <End Role="Doctor" EntitySet="Doctor" />
+            <End Role="TreatmentPlan" EntitySet="TreatmentPlan" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TreatmentPlan_Patient" Association="Self.FK_TreatmentPlan_Patient">
+            <End Role="Patient" EntitySet="Patient" />
+            <End Role="TreatmentPlan" EntitySet="TreatmentPlan" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Model1" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Doctor">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="user_id" Type="Int32" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="fullname" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="middlename" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="hospital" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="speciality" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="User" Relationship="Self.FK_Doctor_User" FromRole="Doctor" ToRole="User" />
+          <NavigationProperty Name="Documents" Relationship="Self.FK_Documents_Doctor" FromRole="Doctor" ToRole="Documents" />
+          <NavigationProperty Name="PatientRecord" Relationship="Self.FK_PatientRecord_Doctor" FromRole="Doctor" ToRole="PatientRecord" />
+          <NavigationProperty Name="Questionnaire" Relationship="Self.FK_Questionnaire_Doctor" FromRole="Doctor" ToRole="Questionnaire" />
+          <NavigationProperty Name="Recommendation" Relationship="Self.FK_Recommendation_Doctor" FromRole="Doctor" ToRole="Recommendation" />
+          <NavigationProperty Name="Test" Relationship="Self.FK_Test_Doctor" FromRole="Doctor" ToRole="Test" />
+          <NavigationProperty Name="TreatmentPlan" Relationship="Self.FK_TreatmentPlan_Doctor" FromRole="Doctor" ToRole="TreatmentPlan" />
+        </EntityType>
+        <EntityType Name="Documents">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="doctor_id" Type="Int32" Nullable="false" />
+          <Property Name="patient_id" Type="Int32" Nullable="false" />
+          <Property Name="type" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="file" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+          <NavigationProperty Name="Doctor" Relationship="Self.FK_Documents_Doctor" FromRole="Documents" ToRole="Doctor" />
+          <NavigationProperty Name="Patient" Relationship="Self.FK_Documents_Patient" FromRole="Documents" ToRole="Patient" />
+          <NavigationProperty Name="DocumentSignature" Relationship="Self.FK_DocumentSignature_Documents" FromRole="Documents" ToRole="DocumentSignature" />
+        </EntityType>
+        <EntityType Name="DocumentSignature">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="document_id" Type="Int32" Nullable="false" />
+          <Property Name="patient_id" Type="Int32" Nullable="false" />
+          <Property Name="media" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+          <NavigationProperty Name="Documents" Relationship="Self.FK_DocumentSignature_Documents" FromRole="DocumentSignature" ToRole="Documents" />
+          <NavigationProperty Name="Patient" Relationship="Self.FK_DocumentSignature_Patient" FromRole="DocumentSignature" ToRole="Patient" />
+        </EntityType>
+        <EntityType Name="Patient">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="user_id" Type="Int32" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="fullname" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="middlename" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="birthday" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Documents" Relationship="Self.FK_Documents_Patient" FromRole="Patient" ToRole="Documents" />
+          <NavigationProperty Name="DocumentSignature" Relationship="Self.FK_DocumentSignature_Patient" FromRole="Patient" ToRole="DocumentSignature" />
+          <NavigationProperty Name="User" Relationship="Self.FK_Patient_User" FromRole="Patient" ToRole="User" />
+          <NavigationProperty Name="PatientRecord" Relationship="Self.FK_PatientRecord_Patient" FromRole="Patient" ToRole="PatientRecord" />
+          <NavigationProperty Name="PatientResponse" Relationship="Self.FK_PatientResponse_Patient" FromRole="Patient" ToRole="PatientResponse" />
+          <NavigationProperty Name="PatientResult" Relationship="Self.FK_PatientResult_Patient" FromRole="Patient" ToRole="PatientResult" />
+          <NavigationProperty Name="Questionnaire" Relationship="Self.FK_Questionnaire_Patient" FromRole="Patient" ToRole="Questionnaire" />
+          <NavigationProperty Name="Recommendation" Relationship="Self.FK_Recommendation_Patient" FromRole="Patient" ToRole="Recommendation" />
+          <NavigationProperty Name="Test" Relationship="Self.FK_Test_Patient" FromRole="Patient" ToRole="Test" />
+          <NavigationProperty Name="TreatmentPlan" Relationship="Self.FK_TreatmentPlan_Patient" FromRole="Patient" ToRole="TreatmentPlan" />
+        </EntityType>
+        <EntityType Name="PatientRecord">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="doctor_id" Type="Int32" Nullable="false" />
+          <Property Name="patient_id" Type="Int32" Nullable="false" />
+          <Property Name="date_of_visit" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="reason" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="diagnosis" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Doctor" Relationship="Self.FK_PatientRecord_Doctor" FromRole="PatientRecord" ToRole="Doctor" />
+          <NavigationProperty Name="Patient" Relationship="Self.FK_PatientRecord_Patient" FromRole="PatientRecord" ToRole="Patient" />
+        </EntityType>
+        <EntityType Name="PatientResponse">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="questionnaire_id" Type="Int32" Nullable="false" />
+          <Property Name="patient_id" Type="Int32" Nullable="false" />
+          <Property Name="response" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Patient" Relationship="Self.FK_PatientResponse_Patient" FromRole="PatientResponse" ToRole="Patient" />
+          <NavigationProperty Name="Questionnaire" Relationship="Self.FK_PatientResponse_Questionnaire" FromRole="PatientResponse" ToRole="Questionnaire" />
+        </EntityType>
+        <EntityType Name="PatientResult">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="test_id" Type="Int32" Nullable="false" />
+          <Property Name="patient_id" Type="Int32" Nullable="false" />
+          <Property Name="result_text" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="media" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+          <NavigationProperty Name="Patient" Relationship="Self.FK_PatientResult_Patient" FromRole="PatientResult" ToRole="Patient" />
+          <NavigationProperty Name="Test" Relationship="Self.FK_PatientResult_Test" FromRole="PatientResult" ToRole="Test" />
+        </EntityType>
+        <EntityType Name="Questionnaire">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="patient_id" Type="Int32" Nullable="false" />
+          <Property Name="doctor_id" Type="Int32" Nullable="false" />
+          <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="title" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Doctor" Relationship="Self.FK_Questionnaire_Doctor" FromRole="Questionnaire" ToRole="Doctor" />
+          <NavigationProperty Name="Patient" Relationship="Self.FK_Questionnaire_Patient" FromRole="Questionnaire" ToRole="Patient" />
+          <NavigationProperty Name="PatientResponse" Relationship="Self.FK_PatientResponse_Questionnaire" FromRole="Questionnaire" ToRole="PatientResponse" />
+        </EntityType>
+        <EntityType Name="Recommendation">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="doctor_id" Type="Int32" Nullable="false" />
+          <Property Name="patient_id" Type="Int32" Nullable="false" />
+          <Property Name="context" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Doctor" Relationship="Self.FK_Recommendation_Doctor" FromRole="Recommendation" ToRole="Doctor" />
+          <NavigationProperty Name="Patient" Relationship="Self.FK_Recommendation_Patient" FromRole="Recommendation" ToRole="Patient" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Test">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="title" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="instruction" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="doctor_id" Type="Int32" Nullable="false" />
+          <Property Name="patient_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Doctor" Relationship="Self.FK_Test_Doctor" FromRole="Test" ToRole="Doctor" />
+          <NavigationProperty Name="Patient" Relationship="Self.FK_Test_Patient" FromRole="Test" ToRole="Patient" />
+          <NavigationProperty Name="PatientResult" Relationship="Self.FK_PatientResult_Test" FromRole="Test" ToRole="PatientResult" />
+        </EntityType>
+        <EntityType Name="TreatmentPlan">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="doctor_id" Type="Int32" Nullable="false" />
+          <Property Name="patient_id" Type="Int32" Nullable="false" />
+          <Property Name="plan_detailt" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Doctor" Relationship="Self.FK_TreatmentPlan_Doctor" FromRole="TreatmentPlan" ToRole="Doctor" />
+          <NavigationProperty Name="Patient" Relationship="Self.FK_TreatmentPlan_Patient" FromRole="TreatmentPlan" ToRole="Patient" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="login" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="password" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="role" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Doctor" Relationship="Self.FK_Doctor_User" FromRole="User" ToRole="Doctor" />
+          <NavigationProperty Name="Patient" Relationship="Self.FK_Patient_User" FromRole="User" ToRole="Patient" />
+        </EntityType>
+        <Association Name="FK_Doctor_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="Doctor" Type="Self.Doctor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Doctor">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Documents_Doctor">
+          <End Role="Doctor" Type="Self.Doctor" Multiplicity="1" />
+          <End Role="Documents" Type="Self.Documents" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Doctor">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Documents">
+              <PropertyRef Name="doctor_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PatientRecord_Doctor">
+          <End Role="Doctor" Type="Self.Doctor" Multiplicity="1" />
+          <End Role="PatientRecord" Type="Self.PatientRecord" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Doctor">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="PatientRecord">
+              <PropertyRef Name="doctor_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Questionnaire_Doctor">
+          <End Role="Doctor" Type="Self.Doctor" Multiplicity="1" />
+          <End Role="Questionnaire" Type="Self.Questionnaire" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Doctor">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Questionnaire">
+              <PropertyRef Name="doctor_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Recommendation_Doctor">
+          <End Role="Doctor" Type="Self.Doctor" Multiplicity="1" />
+          <End Role="Recommendation" Type="Self.Recommendation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Doctor">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Recommendation">
+              <PropertyRef Name="doctor_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Test_Doctor">
+          <End Role="Doctor" Type="Self.Doctor" Multiplicity="1" />
+          <End Role="Test" Type="Self.Test" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Doctor">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Test">
+              <PropertyRef Name="doctor_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TreatmentPlan_Doctor">
+          <End Role="Doctor" Type="Self.Doctor" Multiplicity="1" />
+          <End Role="TreatmentPlan" Type="Self.TreatmentPlan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Doctor">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="TreatmentPlan">
+              <PropertyRef Name="doctor_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Documents_Patient">
+          <End Role="Patient" Type="Self.Patient" Multiplicity="1" />
+          <End Role="Documents" Type="Self.Documents" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Patient">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Documents">
+              <PropertyRef Name="patient_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DocumentSignature_Documents">
+          <End Role="Documents" Type="Self.Documents" Multiplicity="1" />
+          <End Role="DocumentSignature" Type="Self.DocumentSignature" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Documents">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="DocumentSignature">
+              <PropertyRef Name="document_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DocumentSignature_Patient">
+          <End Role="Patient" Type="Self.Patient" Multiplicity="1" />
+          <End Role="DocumentSignature" Type="Self.DocumentSignature" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Patient">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="DocumentSignature">
+              <PropertyRef Name="patient_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Patient_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="Patient" Type="Self.Patient" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Patient">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PatientRecord_Patient">
+          <End Role="Patient" Type="Self.Patient" Multiplicity="1" />
+          <End Role="PatientRecord" Type="Self.PatientRecord" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Patient">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="PatientRecord">
+              <PropertyRef Name="patient_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PatientResponse_Patient">
+          <End Role="Patient" Type="Self.Patient" Multiplicity="1" />
+          <End Role="PatientResponse" Type="Self.PatientResponse" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Patient">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="PatientResponse">
+              <PropertyRef Name="patient_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PatientResult_Patient">
+          <End Role="Patient" Type="Self.Patient" Multiplicity="1" />
+          <End Role="PatientResult" Type="Self.PatientResult" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Patient">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="PatientResult">
+              <PropertyRef Name="patient_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Questionnaire_Patient">
+          <End Role="Patient" Type="Self.Patient" Multiplicity="1" />
+          <End Role="Questionnaire" Type="Self.Questionnaire" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Patient">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Questionnaire">
+              <PropertyRef Name="patient_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Recommendation_Patient">
+          <End Role="Patient" Type="Self.Patient" Multiplicity="1" />
+          <End Role="Recommendation" Type="Self.Recommendation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Patient">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Recommendation">
+              <PropertyRef Name="patient_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Test_Patient">
+          <End Role="Patient" Type="Self.Patient" Multiplicity="1" />
+          <End Role="Test" Type="Self.Test" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Patient">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Test">
+              <PropertyRef Name="patient_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TreatmentPlan_Patient">
+          <End Role="Patient" Type="Self.Patient" Multiplicity="1" />
+          <End Role="TreatmentPlan" Type="Self.TreatmentPlan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Patient">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="TreatmentPlan">
+              <PropertyRef Name="patient_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PatientResponse_Questionnaire">
+          <End Role="Questionnaire" Type="Self.Questionnaire" Multiplicity="1" />
+          <End Role="PatientResponse" Type="Self.PatientResponse" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Questionnaire">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="PatientResponse">
+              <PropertyRef Name="questionnaire_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PatientResult_Test">
+          <End Role="Test" Type="Self.Test" Multiplicity="1" />
+          <End Role="PatientResult" Type="Self.PatientResult" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Test">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="PatientResult">
+              <PropertyRef Name="test_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="test1entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Doctor" EntityType="Self.Doctor" />
+          <EntitySet Name="Documents" EntityType="Self.Documents" />
+          <EntitySet Name="DocumentSignature" EntityType="Self.DocumentSignature" />
+          <EntitySet Name="Patient" EntityType="Self.Patient" />
+          <EntitySet Name="PatientRecord" EntityType="Self.PatientRecord" />
+          <EntitySet Name="PatientResponse" EntityType="Self.PatientResponse" />
+          <EntitySet Name="PatientResult" EntityType="Self.PatientResult" />
+          <EntitySet Name="Questionnaire" EntityType="Self.Questionnaire" />
+          <EntitySet Name="Recommendation" EntityType="Self.Recommendation" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="Test" EntityType="Self.Test" />
+          <EntitySet Name="TreatmentPlan" EntityType="Self.TreatmentPlan" />
+          <EntitySet Name="User" EntityType="Self.User" />
+          <AssociationSet Name="FK_Doctor_User" Association="Self.FK_Doctor_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Doctor" EntitySet="Doctor" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Documents_Doctor" Association="Self.FK_Documents_Doctor">
+            <End Role="Doctor" EntitySet="Doctor" />
+            <End Role="Documents" EntitySet="Documents" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PatientRecord_Doctor" Association="Self.FK_PatientRecord_Doctor">
+            <End Role="Doctor" EntitySet="Doctor" />
+            <End Role="PatientRecord" EntitySet="PatientRecord" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Questionnaire_Doctor" Association="Self.FK_Questionnaire_Doctor">
+            <End Role="Doctor" EntitySet="Doctor" />
+            <End Role="Questionnaire" EntitySet="Questionnaire" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Recommendation_Doctor" Association="Self.FK_Recommendation_Doctor">
+            <End Role="Doctor" EntitySet="Doctor" />
+            <End Role="Recommendation" EntitySet="Recommendation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Test_Doctor" Association="Self.FK_Test_Doctor">
+            <End Role="Doctor" EntitySet="Doctor" />
+            <End Role="Test" EntitySet="Test" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TreatmentPlan_Doctor" Association="Self.FK_TreatmentPlan_Doctor">
+            <End Role="Doctor" EntitySet="Doctor" />
+            <End Role="TreatmentPlan" EntitySet="TreatmentPlan" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Documents_Patient" Association="Self.FK_Documents_Patient">
+            <End Role="Patient" EntitySet="Patient" />
+            <End Role="Documents" EntitySet="Documents" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DocumentSignature_Documents" Association="Self.FK_DocumentSignature_Documents">
+            <End Role="Documents" EntitySet="Documents" />
+            <End Role="DocumentSignature" EntitySet="DocumentSignature" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DocumentSignature_Patient" Association="Self.FK_DocumentSignature_Patient">
+            <End Role="Patient" EntitySet="Patient" />
+            <End Role="DocumentSignature" EntitySet="DocumentSignature" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Patient_User" Association="Self.FK_Patient_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Patient" EntitySet="Patient" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PatientRecord_Patient" Association="Self.FK_PatientRecord_Patient">
+            <End Role="Patient" EntitySet="Patient" />
+            <End Role="PatientRecord" EntitySet="PatientRecord" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PatientResponse_Patient" Association="Self.FK_PatientResponse_Patient">
+            <End Role="Patient" EntitySet="Patient" />
+            <End Role="PatientResponse" EntitySet="PatientResponse" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PatientResult_Patient" Association="Self.FK_PatientResult_Patient">
+            <End Role="Patient" EntitySet="Patient" />
+            <End Role="PatientResult" EntitySet="PatientResult" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Questionnaire_Patient" Association="Self.FK_Questionnaire_Patient">
+            <End Role="Patient" EntitySet="Patient" />
+            <End Role="Questionnaire" EntitySet="Questionnaire" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Recommendation_Patient" Association="Self.FK_Recommendation_Patient">
+            <End Role="Patient" EntitySet="Patient" />
+            <End Role="Recommendation" EntitySet="Recommendation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Test_Patient" Association="Self.FK_Test_Patient">
+            <End Role="Patient" EntitySet="Patient" />
+            <End Role="Test" EntitySet="Test" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TreatmentPlan_Patient" Association="Self.FK_TreatmentPlan_Patient">
+            <End Role="Patient" EntitySet="Patient" />
+            <End Role="TreatmentPlan" EntitySet="TreatmentPlan" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PatientResponse_Questionnaire" Association="Self.FK_PatientResponse_Questionnaire">
+            <End Role="Questionnaire" EntitySet="Questionnaire" />
+            <End Role="PatientResponse" EntitySet="PatientResponse" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PatientResult_Test" Association="Self.FK_PatientResult_Test">
+            <End Role="Test" EntitySet="Test" />
+            <End Role="PatientResult" EntitySet="PatientResult" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище Model1Container" CdmEntityContainer="test1entities">
+          <EntitySetMapping Name="Doctor">
+            <EntityTypeMapping TypeName="Model1.Doctor">
+              <MappingFragment StoreEntitySet="Doctor">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="fullname" ColumnName="fullname" />
+                <ScalarProperty Name="middlename" ColumnName="middlename" />
+                <ScalarProperty Name="hospital" ColumnName="hospital" />
+                <ScalarProperty Name="speciality" ColumnName="speciality" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Documents">
+            <EntityTypeMapping TypeName="Model1.Documents">
+              <MappingFragment StoreEntitySet="Documents">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="doctor_id" ColumnName="doctor_id" />
+                <ScalarProperty Name="patient_id" ColumnName="patient_id" />
+                <ScalarProperty Name="type" ColumnName="type" />
+                <ScalarProperty Name="file" ColumnName="file" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DocumentSignature">
+            <EntityTypeMapping TypeName="Model1.DocumentSignature">
+              <MappingFragment StoreEntitySet="DocumentSignature">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="document_id" ColumnName="document_id" />
+                <ScalarProperty Name="patient_id" ColumnName="patient_id" />
+                <ScalarProperty Name="media" ColumnName="media" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Patient">
+            <EntityTypeMapping TypeName="Model1.Patient">
+              <MappingFragment StoreEntitySet="Patient">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="fullname" ColumnName="fullname" />
+                <ScalarProperty Name="middlename" ColumnName="middlename" />
+                <ScalarProperty Name="birthday" ColumnName="birthday" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PatientRecord">
+            <EntityTypeMapping TypeName="Model1.PatientRecord">
+              <MappingFragment StoreEntitySet="PatientRecord">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="doctor_id" ColumnName="doctor_id" />
+                <ScalarProperty Name="patient_id" ColumnName="patient_id" />
+                <ScalarProperty Name="date_of_visit" ColumnName="date_of_visit" />
+                <ScalarProperty Name="reason" ColumnName="reason" />
+                <ScalarProperty Name="diagnosis" ColumnName="diagnosis" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PatientResponse">
+            <EntityTypeMapping TypeName="Model1.PatientResponse">
+              <MappingFragment StoreEntitySet="PatientResponse">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="questionnaire_id" ColumnName="questionnaire_id" />
+                <ScalarProperty Name="patient_id" ColumnName="patient_id" />
+                <ScalarProperty Name="response" ColumnName="response" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PatientResult">
+            <EntityTypeMapping TypeName="Model1.PatientResult">
+              <MappingFragment StoreEntitySet="PatientResult">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="test_id" ColumnName="test_id" />
+                <ScalarProperty Name="patient_id" ColumnName="patient_id" />
+                <ScalarProperty Name="result_text" ColumnName="result_text" />
+                <ScalarProperty Name="media" ColumnName="media" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Questionnaire">
+            <EntityTypeMapping TypeName="Model1.Questionnaire">
+              <MappingFragment StoreEntitySet="Questionnaire">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="patient_id" ColumnName="patient_id" />
+                <ScalarProperty Name="doctor_id" ColumnName="doctor_id" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="title" ColumnName="title" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Recommendation">
+            <EntityTypeMapping TypeName="Model1.Recommendation">
+              <MappingFragment StoreEntitySet="Recommendation">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="doctor_id" ColumnName="doctor_id" />
+                <ScalarProperty Name="patient_id" ColumnName="patient_id" />
+                <ScalarProperty Name="context" ColumnName="context" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="Model1.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Test">
+            <EntityTypeMapping TypeName="Model1.Test">
+              <MappingFragment StoreEntitySet="Test">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="instruction" ColumnName="instruction" />
+                <ScalarProperty Name="doctor_id" ColumnName="doctor_id" />
+                <ScalarProperty Name="patient_id" ColumnName="patient_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TreatmentPlan">
+            <EntityTypeMapping TypeName="Model1.TreatmentPlan">
+              <MappingFragment StoreEntitySet="TreatmentPlan">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="doctor_id" ColumnName="doctor_id" />
+                <ScalarProperty Name="patient_id" ColumnName="patient_id" />
+                <ScalarProperty Name="plan_detailt" ColumnName="plan_detailt" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="User">
+            <EntityTypeMapping TypeName="Model1.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="login" ColumnName="login" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="role" ColumnName="role" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,33 @@
+﻿<Window x:Class="WpfApp20.AddDocumentWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Добавить документ" Height="300" Width="400" MinHeight="300" MinWidth="400">
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+
+        <TextBlock Text="Название документа:" Margin="0,0,0,10"/>
+        <TextBox x:Name="NameTextBox"  Grid.Row="1" Margin="0,0,0,20" />
+
+        <TextBlock Text="Выберите PDF файл:" Grid.Row="2" Margin="0,0,0,10"/>
+        <Button x:Name="SelectFileButton" Content="Выбрать файл" Background="White" Click="SelectFileButton_Click"
+            Width="Auto" Height="30" Grid.Row="3" HorizontalAlignment="Left" />
+
+        <TextBlock x:Name="SelectedFileTextBlock" Text="" Grid.Row="4" Margin="0,10,0,0" />
+
+        <Button x:Name="AddButton" Content="Добавить документ" Click="AddButton_Click"
+            Width="120" Height="30" Grid.Row="5" Background="White" HorizontalAlignment="Center" />
+
+        <Button x:Name="CloseButton" Content="Назад" Click="CloseButton_Click"  
+            Background="White" Width="60" Height="30" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="10,0,10,0"/>
+    </Grid>
+</Window>

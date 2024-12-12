@@ -1,0 +1,36 @@
+﻿<Window x:Class="WpfApp20.RecommendationPacientWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfApp20"
+        mc:Ignorable="d"
+        Title="RecommendationPacientWindow" Height="450" Width="600" MinHeight="450" MinWidth="600">
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Button Content="Назад" Width="60" HorizontalAlignment="Right" Background="White"
+                Grid.Row="0" Click="BackButton_Click" Margin="0,0,0,10"/>
+
+        <TextBlock Text="Список рекомендаций" FontSize="20" FontWeight="Bold" HorizontalAlignment="Center"
+                   Margin="0,10" Grid.Row="1"/>
+
+        <UniformGrid Grid.Row="2" Background="White" VerticalAlignment="Top" Columns="1" Rows="1" Margin="10 0 10 0">
+            <Button Background="White" FontSize="14" Content="Открыть" Click="OpenRecommendationDetails_Click"/>
+        </UniformGrid>
+        <DataGrid x:Name="RecommendationDataGrid" Grid.Row="3" AutoGenerateColumns="False" Margin="0,10"
+                  IsReadOnly="True" SelectionMode="Single">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Описание" Binding="{Binding context}" Width="*"/>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</Window>

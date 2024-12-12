@@ -1,0 +1,39 @@
+﻿<Window x:Class="WpfApp20.ViewPatientQuestionnaireWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfApp20"
+        mc:Ignorable="d"
+        Title="ViewPatientQuestionnaireWindow" Height="450" Width="600" MinHeight="450" MinWidth="600">
+    <DockPanel>
+        <Button Content="Назад" DockPanel.Dock="Top" HorizontalAlignment="Right" Background="White" VerticalAlignment="Top" Margin="10" Click="BackButton_Click"/>
+
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Text="Список опросников" FontSize="20" FontWeight="Bold" HorizontalAlignment="Center" 
+                       Margin="10" Grid.Row="0"/>
+
+            <UniformGrid Grid.Row="1" Background="White" VerticalAlignment="Top" Rows="1" Columns="3" Margin="10 0 10 0" Height="60">
+                <Button Background="White" FontSize="14" Content="Открыть"  Click="OpenTestDetails_Click"/>
+                <Button Background="White" FontSize="14" Content="Изменить" Click="ChangeTestDetails_Click"/>
+                <Button Background="White" FontSize="14" Content="Удалить" Click="DeleteTest_Click"/>
+            </UniformGrid>
+
+            <DataGrid x:Name="QuestionnaireDataGrid" Grid.Row="2" AutoGenerateColumns="False" Margin="10" 
+                      IsReadOnly="True" SelectionMode="Single">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Результат" Binding="{Binding response}"  Width="*"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
+    </DockPanel>
+</Window>
